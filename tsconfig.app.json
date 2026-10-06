@@ -18,17 +18,17 @@
     "allowJs": true,
     "resolveJsonModule": true,
 
-    /* Paths */
-    "baseUrl": ".",
+      /* Paths */
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@contexts/*": ["src/contexts/*"],
-      "@hocs/*": ["src/hocs/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@pages/*": ["src/pages/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"]
+      "@/*": ["./src/*"],
+      "src/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@contexts/*": ["./src/contexts/*"],
+      "@hocs/*": ["./src/hocs/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"]
     },
 
     /* Linting */
