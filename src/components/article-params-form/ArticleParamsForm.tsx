@@ -32,6 +32,10 @@ export const ArticleParamsForm = ({
 }: ArticleParamsFormProps): React.JSX.Element => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [formState, setFormState] = useState<ArticleStateType>(defaultArticleState);
+  const [formKey, setFormKey] = useState(0);
+  // RadioGroup из src/ui не управляет checked у <input> (uncontrolled),
+  // поэтому после reset залипает последнее выбранное значение.
+  // Перемонтируем через key, чтобы checked выставился по selected заново.
 
   const asideRef = useRef<HTMLElement>(null);
   const arrowRef = useRef<HTMLDivElement>(null);
@@ -54,10 +58,10 @@ export const ArticleParamsForm = ({
     onApply(formState);
   };
 
-  const handleReset = (e: React.FormEvent): void => {
-    e.preventDefault();
+  const handleReset = (): void => {
     setFormState(defaultArticleState);
     onReset();
+    setFormKey((k) => k + 1); // Принудительное перемонтирование RadioGroup, чтобы сбросить нативный checked
   };
 
   return (
@@ -88,6 +92,7 @@ export const ArticleParamsForm = ({
           />
 
           <RadioGroup
+            key={formKey} // перемонтирование для сброса нативного checked
             title="размер шрифта"
             name="fontSize"
             options={fontSizeOptions}
@@ -96,7 +101,7 @@ export const ArticleParamsForm = ({
           />
 
           <Select
-            title="цвет текста"
+            title="цвет шрифта"
             selected={formState.fontColor}
             options={fontColors}
             onChange={handleChange('fontColor')}
